@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>BrillaBee Worksheets</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="simple-header">
+    <h1>📄 Worksheets</h1>
+    <p><a href="index.html" class="back-link">← Back to Home</a></p>
+  </header>
+
+  <main class="card-list" id="worksheet-list">
+    <!-- Worksheets will load here -->
+  </main>
+
+  <footer><p>Made by Swathi Maistry ✨</p></footer>
+
+  <script>
+    const worksheetFolder = "worksheets/";
+    const files = [
+      "Reasoning Test Year 7 2016.pdf",
+      "Reasoning Test Year 7 2017.pdf"
+    ];
+
+    const container = document.getElementById("worksheet-list");
+
+    files.forEach(file => {
+      const title = file.replace(".pdf", "");
+      const card = document.createElement("div");
+      card.className = "worksheet-card";
+      card.innerHTML = `
+        <h3>${title}</h3>
+        <a href="${worksheetFolder + file}" target="_blank" class="download-btn">📥 Download PDF</a>
+      `;
+      container.appendChild(card);
+    });
+  </script>
+</body>
+</html>
