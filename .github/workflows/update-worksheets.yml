@@ -1,0 +1,29 @@
+# File: .github/workflows/update-worksheets.yml
+name: Auto-update worksheets
+
+on:
+  push:
+    paths:
+      - 'worksheets/**'
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Generate worksheets.html
+        run: python scripts/generate_worksheets.py
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add worksheets.html
+          git commit -m "🤖 Auto-update worksheets.html" || echo "No changes to commit"
+          git push
