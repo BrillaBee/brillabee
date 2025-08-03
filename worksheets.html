@@ -17,25 +17,27 @@
 
   <footer><p>Made by Swathi Maistry ✨</p></footer>
 
+  <!-- ✅ Load generated list of files -->
+  <script src="assets/generated-files.js"></script>
+
   <script>
     const worksheetFolder = "worksheets/";
-    const files = [
-      "Reasoning Test Year 7 2016.pdf",
-      "Reasoning Test Year 7 2017.pdf"
-    ];
-
     const container = document.getElementById("worksheet-list");
 
-    files.forEach(file => {
-      const title = file.replace(".pdf", "");
-      const card = document.createElement("div");
-      card.className = "worksheet-card";
-      card.innerHTML = `
-        <h3>${title}</h3>
-        <a href="${worksheetFolder + file}" target="_blank" class="download-btn">📥 Download PDF</a>
-      `;
-      container.appendChild(card);
-    });
+    if (typeof files !== "undefined" && Array.isArray(files)) {
+      files.forEach(file => {
+        const title = file.replace(".pdf", "");
+        const card = document.createElement("div");
+        card.className = "worksheet-card";
+        card.innerHTML = `
+          <h3>${title}</h3>
+          <a href="${worksheetFolder + file}" target="_blank" class="download-btn">📥 Download PDF</a>
+        `;
+        container.appendChild(card);
+      });
+    } else {
+      container.innerHTML = "<p style='color:red'>❌ No worksheet list found. Please check assets/generated-files.js</p>";
+    }
   </script>
 </body>
 </html>
