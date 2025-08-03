@@ -1,56 +1,194 @@
-<script src="assets/generated-files.js"></script>
-<script>
-  const worksheetFolder = "worksheets/";
-  const container = document.getElementById("worksheet-list");
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>BrillaBee Worksheets</title>
+  <link rel='stylesheet' href='style.css'>
+</head>
+<body>
+  <header class="simple-header">
+    <h1>📄 Worksheets</h1>
+    <p><a href="index.html" class="back-link">← Back to Home</a></p>
+  </header>
+  <main class="card-list">
+    
+    <div class="worksheet-card">
+      <h3>Reasoning Marking Scheme Year 7 2014</h3>
+      <a href="worksheets/Reasoning Marking Scheme Year 7 2014.pdf" target="_blank" class="download-btn">📥 Download PDF</a>
+    </div>
+    
+    <div class="worksheet-card">
+      <h3>Reasoning Marking Scheme Year 7 2016</h3>
+      <a href="worksheets/Reasoning Marking Scheme Year 7 2016.pdf" target="_blank" class="download-btn">📥 Download PDF</a>
+    </div>
+    
+    <div class="worksheet-card">
+      <h3>Reasoning Script Year 7 2014</h3>
+      <a href="worksheets/Reasoning Script Year 7 2014.pdf" target="_blank" class="download-btn">📥 Download PDF</a>
+    </div>
+    
+    <div class="worksheet-card">
+      <h3>Reasoning Test Year 7 2014</h3>
+      <a href="worksheets/Reasoning Test Year 7 2014.pdf" target="_blank" class="download-btn">📥 Download PDF</a>
+    </div>
+    
+    <div class="worksheet-card">
+      <h3>Reasoning Test Year 7 2015</h3>
+      <a href="worksheets/Reasoning Test Year 7 2015.pdf" target="_blank" class="download-btn">📥 Download PDF</a>
+    </div>
+    
+    <div class="worksheet-card">
+      <h3>Reasoning Test Year 7 2016</h3>
+      <a href="worksheets/Reasoning Test Year 7 2016.pdf" target="_blank" class="download-btn">📥 Download PDF</a>
+    </div>
+    
+    <div class="worksheet-card">
+      <h3>Reasoning Test Year 7 2017</h3>
+      <a href="worksheets/Reasoning Test Year 7 2017.pdf" target="_blank" class="download-btn">📥 Download PDF</a>
+    </div>
+    
+    <div class="worksheet-card">
+      <h3>Reasoning marking Scheme Year 7 2015</h3>
+      <a href="worksheets/Reasoning marking Scheme Year 7 2015.pdf" target="_blank" class="download-btn">📥 Download PDF</a>
+    </div>
+    
+    <div class="worksheet-card">
+      <h3>Reasoning marking scheme year 7 2018</h3>
+      <a href="worksheets/Reasoning marking scheme year 7 2018.pdf" target="_blank" class="download-btn">📥 Download PDF</a>
+    </div>
+    
+    <div class="worksheet-card">
+      <h3>Reasoning script Year 7 2015</h3>
+      <a href="worksheets/Reasoning script Year 7 2015.pdf" target="_blank" class="download-btn">📥 Download PDF</a>
+    </div>
+    
+    <div class="worksheet-card">
+      <h3>Reasoning script Year 7 2016</h3>
+      <a href="worksheets/Reasoning script Year 7 2016.pdf" target="_blank" class="download-btn">📥 Download PDF</a>
+    </div>
+    
+    <div class="worksheet-card">
+      <h3>Reasoning test and marking scheme Year 7 2017</h3>
+      <a href="worksheets/Reasoning test and marking scheme Year 7 2017.pdf" target="_blank" class="download-btn">📥 Download PDF</a>
+    </div>
+    
+    <div class="worksheet-card">
+      <h3>Reasoning test year 7 2018</h3>
+      <a href="worksheets/Reasoning test year 7 2018.pdf" target="_blank" class="download-btn">📥 Download PDF</a>
+    </div>
+    
+    <div class="worksheet-card">
+      <h3>Reasoning_Test_Year7_2016</h3>
+      <a href="worksheets/Reasoning_Test_Year7_2016.pdf" target="_blank" class="download-btn">📥 Download PDF</a>
+    </div>
+    
+    <div class="worksheet-card">
+      <h3>Reasoning_Test_Year7_2017</h3>
+      <a href="worksheets/Reasoning_Test_Year7_2017.pdf" target="_blank" class="download-btn">📥 Download PDF</a>
+    </div>
+    
+  </main>
+  <footer><p>Made by Swathi Maistry ✨</p></footer>
+</body>
+</html>
+On branch main
+Your branch is ahead of 'origin/main' by 1 commit.
+  (use "git push" to publish your local commits)
 
-  // Group by Year → Category (Test, Script, Marking Scheme)
-  const grouped = {};
-
-  files.forEach(file => {
-    const yearMatch = file.match(/Year[\s_]?7[\s_]?(\d{4})/i);
-    if (!yearMatch) return;
-
-    const year = yearMatch[1];
-    let type = "Other";
-
-    if (/marking scheme/i.test(file)) type = "Marking Scheme";
-    else if (/script/i.test(file)) type = "Script";
-    else if (/test/i.test(file)) type = "Test";
-
-    if (!grouped[year]) grouped[year] = {};
-    if (!grouped[year][type]) grouped[year][type] = [];
-
-    grouped[year][type].push(file);
-  });
-
-  const yearList = Object.keys(grouped).sort();
-
-  yearList.forEach(year => {
-    const yearSection = document.createElement("section");
-    yearSection.innerHTML = `<h2 style="width:100%">📘 Year 7 ${year}</h2>`;
-
-    Object.entries(grouped[year]).forEach(([type, fileList]) => {
-      const subHeader = document.createElement("h3");
-      subHeader.textContent = `📂 ${type}`;
-      subHeader.style.marginTop = "1rem";
-
-      const typeContainer = document.createElement("div");
-      typeContainer.className = "card-list";
-
-      fileList.forEach(file => {
-        const card = document.createElement("div");
-        card.className = "worksheet-card";
-        card.innerHTML = `
-          <h4>${file.replace(".pdf", "")}</h4>
-          <a href="${worksheetFolder + file}" target="_blank" class="download-btn">📥 Download PDF</a>
-        `;
-        typeContainer.appendChild(card);
-      });
-
-      yearSection.appendChild(subHeader);
-      yearSection.appendChild(typeContainer);
-    });
-
-    container.appendChild(yearSection);
-  });
-</script>
+nothing to commit, working tree clean
+Username for 'https://github.com': ^C
+󰀵 smaistry  …/brillabee   main ⇡   01:39  
+ cat worksheets.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>BrillaBee Worksheets</title>
+  <link rel='stylesheet' href='style.css'>
+</head>
+<body>
+  <header class="simple-header">
+    <h1>📄 Worksheets</h1>
+    <p><a href="index.html" class="back-link">← Back to Home</a></p>
+  </header>
+  <main class="card-list">
+    
+    <div class="worksheet-card">
+      <h3>Reasoning Marking Scheme Year 7 2014</h3>
+      <a href="worksheets/Reasoning Marking Scheme Year 7 2014.pdf" target="_blank" class="download-btn">📥 Download PDF</a>
+    </div>
+    
+    <div class="worksheet-card">
+      <h3>Reasoning Marking Scheme Year 7 2016</h3>
+      <a href="worksheets/Reasoning Marking Scheme Year 7 2016.pdf" target="_blank" class="download-btn">📥 Download PDF</a>
+    </div>
+    
+    <div class="worksheet-card">
+      <h3>Reasoning Script Year 7 2014</h3>
+      <a href="worksheets/Reasoning Script Year 7 2014.pdf" target="_blank" class="download-btn">📥 Download PDF</a>
+    </div>
+    
+    <div class="worksheet-card">
+      <h3>Reasoning Test Year 7 2014</h3>
+      <a href="worksheets/Reasoning Test Year 7 2014.pdf" target="_blank" class="download-btn">📥 Download PDF</a>
+    </div>
+    
+    <div class="worksheet-card">
+      <h3>Reasoning Test Year 7 2015</h3>
+      <a href="worksheets/Reasoning Test Year 7 2015.pdf" target="_blank" class="download-btn">📥 Download PDF</a>
+    </div>
+    
+    <div class="worksheet-card">
+      <h3>Reasoning Test Year 7 2016</h3>
+      <a href="worksheets/Reasoning Test Year 7 2016.pdf" target="_blank" class="download-btn">📥 Download PDF</a>
+    </div>
+    
+    <div class="worksheet-card">
+      <h3>Reasoning Test Year 7 2017</h3>
+      <a href="worksheets/Reasoning Test Year 7 2017.pdf" target="_blank" class="download-btn">📥 Download PDF</a>
+    </div>
+    
+    <div class="worksheet-card">
+      <h3>Reasoning marking Scheme Year 7 2015</h3>
+      <a href="worksheets/Reasoning marking Scheme Year 7 2015.pdf" target="_blank" class="download-btn">📥 Download PDF</a>
+    </div>
+    
+    <div class="worksheet-card">
+      <h3>Reasoning marking scheme year 7 2018</h3>
+      <a href="worksheets/Reasoning marking scheme year 7 2018.pdf" target="_blank" class="download-btn">📥 Download PDF</a>
+    </div>
+    
+    <div class="worksheet-card">
+      <h3>Reasoning script Year 7 2015</h3>
+      <a href="worksheets/Reasoning script Year 7 2015.pdf" target="_blank" class="download-btn">📥 Download PDF</a>
+    </div>
+    
+    <div class="worksheet-card">
+      <h3>Reasoning script Year 7 2016</h3>
+      <a href="worksheets/Reasoning script Year 7 2016.pdf" target="_blank" class="download-btn">📥 Download PDF</a>
+    </div>
+    
+    <div class="worksheet-card">
+      <h3>Reasoning test and marking scheme Year 7 2017</h3>
+      <a href="worksheets/Reasoning test and marking scheme Year 7 2017.pdf" target="_blank" class="download-btn">📥 Download PDF</a>
+    </div>
+    
+    <div class="worksheet-card">
+      <h3>Reasoning test year 7 2018</h3>
+      <a href="worksheets/Reasoning test year 7 2018.pdf" target="_blank" class="download-btn">📥 Download PDF</a>
+    </div>
+    
+    <div class="worksheet-card">
+      <h3>Reasoning_Test_Year7_2016</h3>
+      <a href="worksheets/Reasoning_Test_Year7_2016.pdf" target="_blank" class="download-btn">📥 Download PDF</a>
+    </div>
+    
+    <div class="worksheet-card">
+      <h3>Reasoning_Test_Year7_2017</h3>
+      <a href="worksheets/Reasoning_Test_Year7_2017.pdf" target="_blank" class="download-btn">📥 Download PDF</a>
+    </div>
+    
+  </main>
+  <footer><p>Made by Swathi Maistry ✨</p></footer>
+</body>
+</html>
