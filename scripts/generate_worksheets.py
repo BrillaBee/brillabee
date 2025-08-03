@@ -12,7 +12,7 @@ def generate_html():
 <head>
   <meta charset="UTF-8" />
   <title>BrillaBee Worksheets</title>
-  <link rel='stylesheet' href='style.css'>
+  <link rel='stylesheet' href='assets/style.css'>
 </head>
 <body>
   <header class="simple-header">
@@ -21,6 +21,7 @@ def generate_html():
   </header>
   <main class="card-list">
     """
+
     for file in files:
         title = file.replace(".pdf", "")
         html += f"""
@@ -29,6 +30,7 @@ def generate_html():
       <a href="{WORKSHEET_DIR}/{file}" target="_blank" class="download-btn">📥 Download PDF</a>
     </div>
     """
+
     html += """
   </main>
   <footer><p>Made by Swathi Maistry ✨</p></footer>
