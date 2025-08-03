@@ -148,3 +148,18 @@ footer {
     max-width: 1200px;
     margin: auto;
 }
+
+main h2 {
+  margin-top: 2rem;
+  background-color: #fff4cc;
+  padding: 0.5rem 1rem;
+  border-left: 6px solid #ffc107;
+  font-size: 1.6rem;
+}
+
+main h3 {
+  margin-top: 1.2rem;
+  font-size: 1.3rem;
+  color: #444;
+  border-bottom: 1px solid #eee;
+}
