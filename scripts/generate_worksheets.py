@@ -12,7 +12,7 @@ def generate_html():
 <head>
   <meta charset="UTF-8" />
   <title>BrillaBee Worksheets</title>
-  <link rel='stylesheet' href='assets/style.css'>
+  <link rel='stylesheet' href='style.css'>
 </head>
 <body>
   <header class="simple-header">
