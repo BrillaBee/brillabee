@@ -19,19 +19,23 @@ def generate_html():
     <h1>📄 Worksheets</h1>
     <p><a href="index.html" class="back-link">← Back to Home</a></p>
   </header>
-  <main class="card-list">
-    """
+
+  <main style="padding: 20px;">
+    <p><a href="worksheets/all_worksheets.zip" class="download-btn">📦 Download All PDFs</a></p>
+    <ul style="list-style-type: none; padding: 0;">
+"""
 
     for file in files:
         title = file.replace(".pdf", "")
         html += f"""
-    <div class="worksheet-card">
-      <h3>{title}</h3>
-      <a href="{WORKSHEET_DIR}/{file}" target="_blank" class="download-btn">📥 Download PDF</a>
-    </div>
-    """
+      <li style="margin-bottom: 12px;">
+        <span>📘 {title}</span><br />
+        <a href="{WORKSHEET_DIR}/{file}" target="_blank" class="download-btn">📥 Download PDF</a>
+      </li>
+"""
 
     html += """
+    </ul>
   </main>
   <footer><p>Made by Swathi Maistry ✨</p></footer>
 </body>
