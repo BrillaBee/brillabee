@@ -17,3 +17,7 @@ const files = [
   "Reasoning_Test_Year7_2016.pdf",
   "Reasoning_Test_Year7_2017.pdf"
 ];
+
+- name: Generate worksheet list
+  run: |
+    python scripts/generate_worksheets.py > assets/generated-files.js
