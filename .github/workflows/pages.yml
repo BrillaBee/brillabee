@@ -1,0 +1,3 @@
+- name: Generate worksheets.html
+  run: |
+    python scripts/generate_worksheets.py
