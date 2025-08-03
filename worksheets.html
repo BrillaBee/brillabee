@@ -3,38 +3,54 @@
   const worksheetFolder = "worksheets/";
   const container = document.getElementById("worksheet-list");
 
-  // Group files by year
-  const fileGroups = {};
+  // Group by Year → Category (Test, Script, Marking Scheme)
+  const grouped = {};
 
   files.forEach(file => {
-    const match = file.match(/Year\s?(\d{4})/i);
-    if (match) {
-      const year = match[1];
-      if (!fileGroups[year]) fileGroups[year] = [];
-      fileGroups[year].push(file);
-    }
+    const yearMatch = file.match(/Year[\s_]?7[\s_]?(\d{4})/i);
+    if (!yearMatch) return;
+
+    const year = yearMatch[1];
+    let type = "Other";
+
+    if (/marking scheme/i.test(file)) type = "Marking Scheme";
+    else if (/script/i.test(file)) type = "Script";
+    else if (/test/i.test(file)) type = "Test";
+
+    if (!grouped[year]) grouped[year] = {};
+    if (!grouped[year][type]) grouped[year][type] = [];
+
+    grouped[year][type].push(file);
   });
 
-  // Create year sections
-  Object.keys(fileGroups).sort().forEach(year => {
-    const section = document.createElement("section");
-    section.innerHTML = `<h2 style="width:100%">📘 Year ${year}</h2>`;
-    
-    const groupDiv = document.createElement("div");
-    groupDiv.className = "card-list";
+  const yearList = Object.keys(grouped).sort();
 
-    fileGroups[year].forEach(file => {
-      const title = file.replace(".pdf", "");
-      const card = document.createElement("div");
-      card.className = "worksheet-card";
-      card.innerHTML = `
-        <h3>${title}</h3>
-        <a href="${worksheetFolder + file}" target="_blank" class="download-btn">📥 Download PDF</a>
-      `;
-      groupDiv.appendChild(card);
+  yearList.forEach(year => {
+    const yearSection = document.createElement("section");
+    yearSection.innerHTML = `<h2 style="width:100%">📘 Year 7 ${year}</h2>`;
+
+    Object.entries(grouped[year]).forEach(([type, fileList]) => {
+      const subHeader = document.createElement("h3");
+      subHeader.textContent = `📂 ${type}`;
+      subHeader.style.marginTop = "1rem";
+
+      const typeContainer = document.createElement("div");
+      typeContainer.className = "card-list";
+
+      fileList.forEach(file => {
+        const card = document.createElement("div");
+        card.className = "worksheet-card";
+        card.innerHTML = `
+          <h4>${file.replace(".pdf", "")}</h4>
+          <a href="${worksheetFolder + file}" target="_blank" class="download-btn">📥 Download PDF</a>
+        `;
+        typeContainer.appendChild(card);
+      });
+
+      yearSection.appendChild(subHeader);
+      yearSection.appendChild(typeContainer);
     });
 
-    section.appendChild(groupDiv);
-    container.appendChild(section);
+    container.appendChild(yearSection);
   });
 </script>
